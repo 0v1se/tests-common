@@ -32,3 +32,15 @@ module.exports.expectThrow = async function(promise) {
   }
   assert.fail('Expected throw not received');
 };
+function randomString(length, chars) {
+  var result = '';
+  for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+  return result;
+}
+function randomHexString(length) {
+  return "0x" + randomString(length, '0123456789abcdef');
+}
+module.exports.randomString = randomString;
+module.exports.randomAddress = function() {
+  return randomHexString(40);
+}

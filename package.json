@@ -1,6 +1,6 @@
 {
   "name": "daonomic-tests",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Common utilities for smart contract testing",
   "main": "index.js",
   "scripts": {
