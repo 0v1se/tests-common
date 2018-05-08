@@ -40,7 +40,11 @@ function randomString(length, chars) {
 function randomHexString(length) {
   return "0x" + randomString(length, '0123456789abcdef');
 }
+function randomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 module.exports.randomString = randomString;
+module.exports.randomInt = randomInt;
 module.exports.randomAddress = function() {
   return randomHexString(40);
 }
