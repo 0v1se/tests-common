@@ -1,3 +1,13 @@
+function bn(value) { return new web3.BigNumber(value) };
+
+module.exports.verifyBalanceChange = async function(account, change, todo) {
+  let before = await web3.eth.getBalance(account);
+  await todo();
+  let after = await web3.eth.getBalance(account);
+  let actual = before.sub(after)
+  assert(before.add(change).equals(after), "before: " + before.toFixed() + " after: " + after.toFixed() + " actual: " + actual.toFixed() + " test: " + bn(change).toFixed());
+}
+
 module.exports.awaitEvent = function(event) {
   return new Promise((resolve, reject) => {
     function handler(err, result) {
@@ -11,7 +21,7 @@ module.exports.awaitEvent = function(event) {
     event.watch(handler);
   });
 };
-module.exports.expectThrow = async function(promise) {
+module.exports.expectThrow = async function(promise, message) {
   try {
     await promise;
   } catch (error) {
@@ -30,7 +40,7 @@ module.exports.expectThrow = async function(promise) {
     );
     return;
   }
-  assert.fail('Expected throw not received');
+  assert(false, message ? message : 'Expected throw not received');
 };
 function randomString(length, chars) {
   var result = '';
