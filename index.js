@@ -54,6 +54,7 @@ function randomInt(max) {
   return Math.floor(Math.random() * max);
 }
 module.exports.randomString = randomString;
+module.exports.randomHexString = randomHexString;
 module.exports.randomInt = randomInt;
 module.exports.randomAddress = function() {
   return randomHexString(40);
