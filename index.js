@@ -8,7 +8,7 @@ module.exports.verifyBalanceChange = async function(account, change, todo) {
   assert(before.add(change).equals(after), "before: " + before.toFixed() + " after: " + after.toFixed() + " actual: " + actual.toFixed() + " test: " + bn(change).toFixed());
 }
 
-module.exports.findLog = function {
+module.exports.findLog = function(tx, name) {
     var result = [];
     tx.logs.forEach(log => {
         if (log.event == name) {
