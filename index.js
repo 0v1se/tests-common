@@ -8,6 +8,22 @@ module.exports.verifyBalanceChange = async function(account, change, todo) {
   assert(before.add(change).equals(after), "before: " + before.toFixed() + " after: " + after.toFixed() + " actual: " + actual.toFixed() + " test: " + bn(change).toFixed());
 }
 
+module.exports.findLog = function {
+    var result = [];
+    tx.logs.forEach(log => {
+        if (log.event == name) {
+            result.push(log);
+        }
+    });
+    if (result.length == 0) {
+        return null;
+    } else if (result.length == 1) {
+        return result[0];
+    } else {
+        return result;
+    }
+}
+
 module.exports.awaitEvent = function(event) {
   return new Promise((resolve, reject) => {
     function handler(err, result) {
