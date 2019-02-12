@@ -24,19 +24,6 @@ module.exports.findLog = function(tx, name) {
     }
 }
 
-module.exports.awaitEvent = function(event) {
-  return new Promise((resolve, reject) => {
-    function handler(err, result) {
-      event.stopWatching();
-      if (err) {
-        reject(err);
-      } else {
-        resolve(result);
-      }
-    }
-    event.watch(handler);
-  });
-};
 module.exports.expectThrow = async function(promise, message) {
   try {
     await promise;
@@ -78,7 +65,7 @@ module.exports.randomAddress = function() {
 module.exports.increaseTime = function(duration) {
   const id = Date.now()
   return new Promise((resolve, reject) => {
-    web3.currentProvider.sendAsync({
+    web3.currentProvider.send({
       jsonrpc: '2.0',
       method: 'evm_increaseTime',
       params: [duration],
@@ -86,7 +73,7 @@ module.exports.increaseTime = function(duration) {
     }, err1 => {
       if (err1) return reject(err1)
 
-      web3.currentProvider.sendAsync({
+      web3.currentProvider.send({
         jsonrpc: '2.0',
         method: 'evm_mine',
         id: id+1,
